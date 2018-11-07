@@ -10,7 +10,8 @@ function setup() {
   stroke(255);
   strokeWeight(2);
   angleMode(DEGREES);
-  turtle = new Turtle(width / 2, height / 2, 0);
+
+  turtle = new Turtle(width / 2, height / 2, -90);
 
   let shape = shapeInPath.get('shape');
   shape ?  editor.value(shape) : editor.value(initialShape);
@@ -46,14 +47,19 @@ function walkTurtle() {
   let tokens = code.split(' ');
 
   for (let i = 0; i < tokens.length; i++) {
-    if (commands[tokens[i]]) {
-      commands[tokens[i]](tokens[i + 1]);
+    if (comargless[tokens[i]]) {
+      comargless[tokens[i]]();
+    } else if (com1arg[tokens[i]] && tokens[i + 1]) {
+      com1arg[tokens[i]](tokens[i + 1]);
+    } else if (com2arg[tokens[i]] && tokens[i + 1] && tokens[i + 2]) {
+      com2arg[tokens[i]](tokens[i + 1], tokens[i + 2]);
     }
   }
+  turtle.show();
   pop();
   typing();
 }
 
 function draw() {
-  // put drawing code here
+
 }
