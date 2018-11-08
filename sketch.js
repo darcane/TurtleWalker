@@ -10,7 +10,7 @@ function setup() {
   stroke(255);
   strokeWeight(2);
   angleMode(DEGREES);
-
+  
   turtle = new Turtle(width / 2, height / 2, -90);
 
   let shape = shapeInPath.get('shape');
@@ -37,6 +37,9 @@ function debounce(func, wait, immediate) {
 function walkTurtle() {
   background(51);
   push();
+  globAng = 0;
+  globX = width / 2;
+  globY = height / 2;
   turtle.reset();
   code = editor.value();
   let typing = debounce(function() {
