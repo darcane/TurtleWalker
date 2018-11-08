@@ -42,7 +42,6 @@ class Turtle {
     setxy(x,y){
         let ang = atan(abs(globY-y)/abs(globX-x));
         this.rightTurn(globAng);
-        console.log(ang);
         //region 1
         if(globX > x && globY > y) ang = 180 - ang;
         //region 2
@@ -51,7 +50,6 @@ class Turtle {
         else if(globX < x && globY < y) ang = -ang;
         //region 4
         else if(globX > x && globY < y) ang = 180 + ang;
-        console.log(ang);
         this.rightTurn(ang);
         let dist = sqrt((globX-x)*(globX-x)+(globY-y)*(globY-y));
         this.forward(dist);
