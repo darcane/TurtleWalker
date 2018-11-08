@@ -1,3 +1,6 @@
+let globAng = 0;
+let globX = 0;
+let globY = 0;
 class Turtle {
     constructor(x, y, ang) {
         this.x = x;
@@ -7,8 +10,10 @@ class Turtle {
     }
 
     reset() {
-        push();
         translate(this.x, this.y);
+        globX = this.x;
+        globY = this.y;
+        globAng = -this.ang;
         rotate(this.ang);
         this.pen = true;
         this.showTurtle = true;
@@ -17,25 +22,39 @@ class Turtle {
     forward(len) {
         len = parseInt(len);
         if (this.pen) line(0, 0, len, 0);
+        globX += len * cos(globAng);
+        globY += len * sin(globAng);
         translate(len, 0);
     }
 
     rightTurn(ang) {
-        rotate(ang);
+        ang = parseInt(ang);
+        if(ang){
+            rotate(ang);
+            globAng += (-ang);
+        }
     }
 
     home(){
-        console.log("Home command will be leave ink while going home :)");
-        //beginShape(LINES);
-        //vertex(0,0);
-        pop();
-        //vertex(width/2,height/2);
-        //endShape();
-        this.reset();
+        this.setxy(this.x,this.y);
     }
 
     setxy(x,y){
-        console.log("setxy command will be implemented soon!");
+        let ang = atan(abs(globY-y)/abs(globX-x));
+        this.rightTurn(globAng);
+        console.log(ang);
+        //region 1
+        if(globX > x && globY > y) ang = 180 - ang;
+        //region 2
+        else if(globX < x && globY > y) ang = ang;
+        //region 3
+        else if(globX < x && globY < y) ang = -ang;
+        //region 4
+        else if(globX > x && globY < y) ang = 180 + ang;
+        console.log(ang);
+        this.rightTurn(ang);
+        let dist = sqrt((globX-x)*(globX-x)+(globY-y)*(globY-y));
+        this.forward(dist);
     }
 
     show() {
