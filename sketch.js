@@ -6,7 +6,7 @@ const shapeInPath = (new URL(document.location)).searchParams;
 
 function setup() {
   editor = select('#editor');
-  createCanvas(700, 600);
+  createCanvas(800, 600);
   stroke(255);
   strokeWeight(2);
   angleMode(DEGREES);
